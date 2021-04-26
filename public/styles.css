@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+:root {
+  --primary-color: #7159c1;
+}
+
+* {
+  padding: 0;
+  border: none;
+  margin: 0;
+}
+
+body {
+  background-color: var(--primary-color);
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  background-color: white;
+  width: 100%;
+  padding: 32px;
+  text-align: center;
+  box-sizing: border-box; /* devido ao conceito de box modal, quando aplicamos um padding, margin ou border de qualquer numero, ele irá adicionar esse valor ao 100% do nosso width. Ao invés de calcularmos para colocarmos ele alinhado com o padding, usamos uma propriedade chamada box-sizing, com a opção border-box, que ele irá levar todo o conteudo até o limite da largura do conteudo. ele distribui corretamente, alinhando o elemento DOC: https://www.w3schools.com/cssref/css3_pr_box-sizing.asp*/
+}
+
+.links {
+  font-size: 22px;
+}
+
+/* se tivermos dois elementos e quisermos colocar alguma propriedade, como um margin, em apenas um deles, para dar um espaçamento por exemplo, utilizamos da seguinte forma  */
+.links a + a {
+  margin-left: 32px;
+} /* o que significa isso ? seria como se falassemos " pegue o "a" prescendente ao outro a*/
+
+.links a {
+  text-decoration: none;
+  color: #777;
+  position: relative;
+}
+
+.links a.active {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.links a:hover {
+  color: var(--primary-color);
+}
+
+/*Em CSS, ::after cria um pseudo-elemento que é o último filho do elemento selecionado. Muitas vezes é usado para adicionar e melhorar o conteúdo de um elemento como a propriedade content. É inline por padrão. Doc: https://developer.mozilla.org/pt-BR/docs/Web/CSS/::after
+como ele é um elemento que por padrão é inline e after, ele vai ficar ao lado esquerdo do meu elemente. Abaixo eu estou mexendo em como ele aparece inicialmente e com o hover, eu digo como ele aparecerá após. dou um position absolute, tendo o links como relative, para que o limite do width seja respeitado com relação ao pai dele (.links). mexo na posição dele com o left e o bottom*/
+.links a:after {
+  content: "";
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+}
+
+/* consultar TRANSITION DOC para ver todas as possibilidades: https://www.w3schools.com/css/css3_transitions.asp*/
+.links a:hover::after {
+  width: 100%;
+  transition: width 700ms ease-in-out;
+}
